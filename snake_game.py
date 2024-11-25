@@ -47,3 +47,19 @@ def Snake_game():
 
     # Количество набранных очков
     score = 0
+
+    # Функция для отображения счёта
+    def show_score(choice, color, font, size):
+
+        # Создание объекта score_font
+        score_font = pygame.font.SysFont(font, size)
+
+
+        score_surface = score_font.render('Счёт : ' + str(score), True, color)
+
+        # Создание четырёхугольника для счёта
+        score_rect = score_surface.get_rect()
+
+        # отображаем текст
+        game_window.blit(score_surface, score_rect)
+
