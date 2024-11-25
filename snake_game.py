@@ -2,6 +2,7 @@ import pygame
 import time
 import random
 
+
 def Snake_game():
     snake_speed = 15
 
@@ -20,7 +21,7 @@ def Snake_game():
     pygame.init()
 
     # Инициализируем игровое окно
-    pygame.display.set_caption('Змейка')
+    pygame.display.set_caption("Змейка")
     game_window = pygame.display.set_mode((window_x, window_y))
 
     # FPS (frames per second) контроллер
@@ -30,19 +31,17 @@ def Snake_game():
     snake_position = [100, 50]
 
     # Определяем первые 4 блока змейки
-    snake_body = [[100, 50],
-                  [90, 50],
-                  [80, 50],
-                  [70, 50]
-                  ]
+    snake_body = [[100, 50], [90, 50], [80, 50], [70, 50]]
     # Позиция яблока
-    fruit_position = [random.randrange(1, (window_x // 10)) * 10,
-                      random.randrange(1, (window_y // 10)) * 10]
+    fruit_position = [
+        random.randrange(1, (window_x // 10)) * 10,
+        random.randrange(1, (window_y // 10)) * 10,
+    ]
 
     fruit_spawn = True
 
     # Змейка по уцмолчанию двигается вправо
-    direction = 'RIGHT'
+    direction = "RIGHT"
     change_to = direction
 
     # Количество набранных очков
@@ -54,8 +53,7 @@ def Snake_game():
         # Создание объекта score_font
         score_font = pygame.font.SysFont(font, size)
 
-
-        score_surface = score_font.render('Счёт : ' + str(score), True, color)
+        score_surface = score_font.render("Счёт : " + str(score), True, color)
 
         # Создание четырёхугольника для счёта
         score_rect = score_surface.get_rect()
@@ -67,7 +65,7 @@ def Snake_game():
     def game_over():
 
         try:
-            with open('highscore.txt', 'r') as f:
+            with open("highscore.txt", "r") as f:
                 current_highscore = int(f.read())
         except (FileNotFoundError, ValueError):
             current_highscore = 0  # Значение счёта по умолчанию
@@ -75,14 +73,15 @@ def Snake_game():
             # Сравнение нынешнего результата с максимальным
         if score > current_highscore:
             # Если нынешний результат больше, чем максимальный, то записываем нынешний результат в файл
-            with open('highscore.txt', 'w') as f:
-                f.write('%d' % score)
+            with open("highscore.txt", "w") as f:
+                f.write("%d" % score)
 
-        my_font = pygame.font.SysFont('times new roman', 50)
+        my_font = pygame.font.SysFont("times new roman", 50)
 
         # Создаём текстовую поверхность, на которой будем отображать результат
         game_over_surface = my_font.render(
-            'Вы набрали : ' + str(score) + ' очков', True, red)
+            "Вы набрали : " + str(score) + " очков", True, red
+        )
 
         # Создаём четырёхугольник
         game_over_rect = game_over_surface.get_rect()
@@ -110,55 +109,62 @@ def Snake_game():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    change_to = 'UP'
+                    change_to = "UP"
                 if event.key == pygame.K_DOWN:
-                    change_to = 'DOWN'
+                    change_to = "DOWN"
                 if event.key == pygame.K_LEFT:
-                    change_to = 'LEFT'
+                    change_to = "LEFT"
                 if event.key == pygame.K_RIGHT:
-                    change_to = 'RIGHT'
+                    change_to = "RIGHT"
 
         # Реализация управления характерного для змейки
-        if change_to == 'UP' and direction != 'DOWN':
-            direction = 'UP'
-        if change_to == 'DOWN' and direction != 'UP':
-            direction = 'DOWN'
-        if change_to == 'LEFT' and direction != 'RIGHT':
-            direction = 'LEFT'
-        if change_to == 'RIGHT' and direction != 'LEFT':
-            direction = 'RIGHT'
+        if change_to == "UP" and direction != "DOWN":
+            direction = "UP"
+        if change_to == "DOWN" and direction != "UP":
+            direction = "DOWN"
+        if change_to == "LEFT" and direction != "RIGHT":
+            direction = "LEFT"
+        if change_to == "RIGHT" and direction != "LEFT":
+            direction = "RIGHT"
 
         # Управление
-        if direction == 'UP':
+        if direction == "UP":
             snake_position[1] -= 10
-        if direction == 'DOWN':
+        if direction == "DOWN":
             snake_position[1] += 10
-        if direction == 'LEFT':
+        if direction == "LEFT":
             snake_position[0] -= 10
-        if direction == 'RIGHT':
+        if direction == "RIGHT":
             snake_position[0] += 10
 
         # Механизм тела змеи
         # если змея съедает яблоко, то её тело увеличсивается, а счет увеличиваетса на 10
         snake_body.insert(0, list(snake_position))
-        if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
+        if (
+            snake_position[0] == fruit_position[0]
+            and snake_position[1] == fruit_position[1]
+        ):
             score += 10
             fruit_spawn = False
         else:
             snake_body.pop()
 
         if not fruit_spawn:
-            fruit_position = [random.randrange(1, (window_x // 10)) * 10,
-                              random.randrange(1, (window_y // 10)) * 10]
+            fruit_position = [
+                random.randrange(1, (window_x // 10)) * 10,
+                random.randrange(1, (window_y // 10)) * 10,
+            ]
 
         fruit_spawn = True
         game_window.fill(black)
 
         for pos in snake_body:
-            pygame.draw.rect(game_window, green,
-                             pygame.Rect(pos[0], pos[1], 10, 10))
-        pygame.draw.rect(game_window, white, pygame.Rect(
-            fruit_position[0], fruit_position[1], 10, 10))
+            pygame.draw.rect(game_window, green, pygame.Rect(pos[0], pos[1], 10, 10))
+        pygame.draw.rect(
+            game_window,
+            white,
+            pygame.Rect(fruit_position[0], fruit_position[1], 10, 10),
+        )
 
         # Условия конца игры
         if snake_position[0] < 0 or snake_position[0] > window_x - 10:
@@ -172,7 +178,7 @@ def Snake_game():
                 game_over()
 
         # Непрерывно показываем счёт
-        show_score(1, white, 'times new roman', 20)
+        show_score(1, white, "times new roman", 20)
 
         # Обновление экрана
         pygame.display.update()

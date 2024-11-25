@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
 from snake_game import Snake_game
 
-class Menu(QWidget): # Код для меню на PyQt5
+
+class Menu(QWidget):  # Код для меню на PyQt5
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Меню - Змейка")
@@ -33,7 +34,7 @@ class Menu(QWidget): # Код для меню на PyQt5
 
     def load_max_score(self):
         try:
-            with open('highscore.txt', 'r') as file:
+            with open("highscore.txt", "r") as file:
                 max_score = file.readline().strip()
                 return max_score if max_score else "0"
         except FileNotFoundError:
