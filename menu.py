@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
+from PyQt5 import QtCore
 from snake_game import Snake_game
 
 
@@ -6,18 +7,21 @@ class Menu(QWidget):  # Код для меню на PyQt5
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Меню - Змейка")
-        self.setGeometry(800, 380, 300, 200)
+        self.setGeometry(800, 380, 400, 300)
 
         self.layout = QVBoxLayout()
 
         # Заголовок игры
         self.title_label = QLabel("Змейка", self)
         self.title_label.setStyleSheet("font-size: 24px; font-weight: bold;")
+        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.title_label)
 
         # Максимальный результат
         self.max_score = self.load_max_score()
         self.score_label = QLabel(f"Максимальный результат: {self.max_score}", self)
+        self.score_label.setStyleSheet("font-size: 14px")
+        self.score_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.score_label)
 
         # Кнопка "Запустить игру"
