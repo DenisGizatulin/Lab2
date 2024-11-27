@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from snake_game import Snake_game
 
 
@@ -8,6 +8,8 @@ class Menu(QWidget):  # Код для меню на PyQt5
         super().__init__()
         self.setWindowTitle("Меню - Змейка")
         self.setGeometry(800, 380, 400, 300)
+
+        self.setWindowIcon(QtGui.QIcon("snake.ico"))
 
         self.layout = QVBoxLayout()
 

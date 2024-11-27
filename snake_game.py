@@ -24,6 +24,10 @@ def Snake_game():
     pygame.display.set_caption("Змейка")
     game_window = pygame.display.set_mode((window_x, window_y))
 
+    # Установка иконки
+    icon = pygame.image.load('snake.ico')
+    pygame.display.set_icon(icon)
+
     # FPS (frames per second) контроллер
     fps = pygame.time.Clock()
 
