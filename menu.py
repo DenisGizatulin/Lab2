@@ -44,7 +44,7 @@ class Menu(QWidget):  # Код для меню на PyQt5
                 max_score = file.readline().strip()
                 return max_score if max_score else "0"
         except FileNotFoundError:
-            return "Файл для записи не найден!"
+            return "0"
 
     def start_game(self):
         game_result = Snake_game()
